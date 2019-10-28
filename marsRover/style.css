@@ -1,0 +1,54 @@
+  @font-face{
+
+    font-family: lucida;
+    src: url(./fonts/Lucida.ttf);
+ }
+
+  @font-face{
+
+    font-family: neuropol;
+    src: url(./fonts/neuropol.ttf);
+ }
+
+   @font-face{
+
+    font-family: klavika;
+    src: url(./fonts/klavika.otf);
+ }
+
+  body{
+    background-image: url('surroundings/pz.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background-color: #444;*/
+  }
+
+
+  .displayTag{
+    font-family: neuropol;
+     font-size: 3.5em; 
+  }
+
+  .flicker {
+    animation:fade 1500ms infinite;
+    -webkit-animation:fade 1500ms infinite;
+    color: white;
+    text-decoration-color: white;
+    padding: 0px;
+    margin: 2px;
+}
+
+
+/*
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+

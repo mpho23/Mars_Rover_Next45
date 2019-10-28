@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mars Rover - Next45</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/OBJLoader.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="ionic.css">
+  </head>
+  <body ng-app="marsRover">
+    <div ng-controller="roverCtrl">
+
+    <div class="row">
+        <div class="upperLayer light">
+             <div>
+            <div  align="center" style="padding-bottom: 27%; font-size: 2em;" ng-show="roundsDone==true">
+                <p style="padding-top: 50px;">The resulting location is:</p><br>
+                <p>{{resPack.x}}  &nbsp;  &nbsp; &nbsp;{{resPack.y}} &nbsp;  &nbsp; &nbsp; {{resPack.dir}}</p>
+            </div>
+
+            <div  style="padding-top: 40%">
+              <div class="light" align="center" style="font-size: 2.5em;" ng-show="loadingScreen==true">Loading...</div>
+            </div>
+
+            <div  align="center" style="padding-top: 32%;">
+            </div>
+
+        </div>
+     </div>
+      <div id="output" class="col-75"></div>
+
+      
+      <!-- Side dashboard -->
+      <div id="sideScreen" class="col-25" align="center" style=" font-family: klavika;">
+        <div class="card">
+          <div class="item">
+           <strong class="calm">Enter Commands</strong><br><br>
+          
+          <span>Starting Position:</span><br>
+
+          <div class="numInput" align="left">
+            <span>X: </span>
+                <input type="number" ng-model="load.initX" ng-change="checkNumbers(load.initX,'x')">
+          </div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            
+              <div class="numInput" align="right">
+                <span>Y: </span>
+                <input type="number" ng-model="load.initY" ng-change="checkNumbers(load.initY,'y')">
+              </div>
+            
+              <div class="list list-inset" id="stringBoard">
+                  <span>Starting Direction</span><br>
+                  <input type="text" placeholder="Enter only 'N','S','E' or 'W'" ng-model="load.initDirection" ng-change="checkDir(load.initDirection, 'dir')"><br>
+
+                  <span>Commands</span><br>
+                  <input type="text" placeholder=" Enter only 'M','L','R'" ng-model="load.commands" ng-change="checkCommands(load.commands, 'cmd')">
+              </div>
+
+            <div align="center">
+              <button class="bottom-btn" ng-click="executeCommand(load)" ng-disabled="executeInvalid">Execute</button>
+              <button class="bottom-btn" ng-click="stop()">Reset</button>
+            </div><br>
+          </div>
+
+          <div class="item item-divider">
+              <span class="assertive">RESULTING LOCATION: </span><br><br>
+              <span>X: {{resPack.x}}</span> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+            <span>Y: {{resPack.y}}</span><br>
+          </div>
+          <div class="item">
+              <p>Instructions:</p><br>
+              <div align="left" class="instructionPan">
+                <span class="balanced">Area:&nbsp;&nbsp;</span><span>20 * 20 square units</span><br>
+                <span class="balanced">Position:&nbsp;</span><span>{{load.initX}}&nbsp;&nbsp;&nbsp;&nbsp;{{load.initY}}</span><br>
+                <span class="balanced">Commands:&nbsp;</span><span>{{load.commands}}</span>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card col-75 bottomDisplay assertive"><br>
+        <p class="displayTag" id="displayPar" align="center"></p>
+        <br>
+      </div>
+
+      <div class="col-25 ">
+      <img src="nextLogo.png" class="nextLogo">
+      </div>
+    </div>
+
+    </div>
+  </body>
+</html>
+
+<style type="text/css">
+ .card{
+    /*padding: 0px;*/
+    margin: 0px;
+    margin-left: 10px;
+    background-color: #444;
+
+  }
+
+
+  .dirOverlay{
+    color: white;
+    font-family: klavika;
+    font-size: 1.5em;
+  }
+
+  #dirput{
+    display: inline-flex;
+    max-width: 3em;
+  }
+
+  .instructionPan{
+      padding-left: 5px; 
+      padding-bottom: 10px;
+    }
+
+  .item{
+    padding: 2px;
+  }
+
+  .numInput{
+    max-width: 4em;
+    display: inline-block;
+  }
+
+ 
+
+
+  .bottomDisplay{
+    margin-left: 0px;
+
+  }
+
+  input[type=number]{
+      display: inline-flex;
+      border: solid 1px #444;
+      border-radius: 5px;
+      max-width: 3em;
+      padding: 4px;
+      margin: 0px;
+  }
+
+    input[type=text]{
+      border: solid 1px #444;
+      border-radius: 5px;
+      min-width: 14em;
+      margin: 0px;
+      padding: 10px;
+  }
+
+
+  .nextLogo{
+      max-width: 80%;
+      margin-left: 20px;
+  }
+
+  .upperLayer{
+      min-height: 80%;
+      min-width: 75%;
+      opacity: 0.85;
+      background-color: transparent;
+      z-index: 700;
+      position: absolute;
+      /*color: white;*/
+
+  }
+
+  .bottom-btn{
+    display: inline;
+    min-width: 6em;
+    color: blue;
+  }
+</style>
